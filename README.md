@@ -1,4 +1,4 @@
- Clasificador de Spam y Phishing
+# Clasificador de Spam y Phishing
 
 ![Python](https://img.shields.io/badge/Python-3.8%2B-blue?logo=python&logoColor=white)
 ![Sin dependencias](https://img.shields.io/badge/dependencias-ninguna-brightgreen)
@@ -21,35 +21,6 @@ Lee archivos `.txt` que simulan correos electrónicos, analiza su contenido y lo
 | `PHISHING` | Intento de suplantación de identidad o robo de datos |
 
 El resultado se muestra en una tabla con el porcentaje de confianza de cada decisión.
-
----
-
-## Estructura del proyecto
-
-```
-proyecto_algoritmos/develop/
-│
-├── bst.py            →  Implementación del BST (nodos, inserción, búsqueda, recorridos)
-├── dictionary.py     →  Palabras clave, dominios sospechosos y umbrales de clasificación
-├── classifier.py     →  Motor de análisis: combina BST y diccionarios para puntuar el email
-├── email_parser.py   →  Lee los archivos .txt y extrae remitente, asunto y cuerpo
-├── main.py           →  Punto de entrada: carga los emails y muestra la tabla de resultados
-│
-└── emails/
-    ├── email_legitimo.txt
-    ├── email_spam.txt
-    └── email_phishing.txt
-```
-
-Cada módulo tiene una responsabilidad clara y no hay dependencias circulares:
-
-```
-main.py
-  ├── email_parser.py
-  └── classifier.py
-        ├── bst.py
-        └── dictionary.py
-```
 
 ---
 
@@ -146,45 +117,6 @@ No se trata de elegir uno u otro — cada uno cubre lo que el otro no puede:
 
 ---
 
-## Flujo de clasificación
-
-```
-Archivos .txt en emails/
-        │
-        ▼
-  Parsear email
-  (extraer sender, subject, body)
-        │
-        ▼
-  Normalizar texto
-  (minúsculas + reemplazar homoglifos: 0→o, 1→i, 3→e...)
-        │
-        ├──────────────────────────────────────┐
-        ▼                                      ▼
-  Buscar frases en diccionario          Buscar tokens en BST
-  (subcadenas — O(1) por entrada)       (palabras — O(log n) c/u)
-        │                                      │
-        └──────────────┬───────────────────────┘
-                       ▼
-             Verificar URLs contra
-             dominios sospechosos
-                       │
-                       ▼
-             Sumar puntuaciones
-             spam_score / phishing_score
-                       │
-                       ▼
-             Aplicar umbrales:
-               phishing_score ≥ 12  →  PHISHING
-               spam_score ≥ 15      →  SPAM
-               cualquiera ≥ 5       →  SOSPECHOSO
-               si no                →  LEGITIMO
-```
-
-La **confianza** no es una probabilidad estadística, sino un indicador de cuánto supera el email el umbral de su categoría. Un `LEGITIMO` al 100% significa que no se encontró ninguna señal de alarma.
-
----
-
 ## Algoritmos implementados
 
 ### Inserción recursiva
@@ -238,13 +170,7 @@ def _explore_by_category(self, current, category, result):
 
 ## Emails de prueba
 
-Los tres archivos incluidos en `emails/` están diseñados para cubrir los casos extremos del clasificador:
-
-**`email_legitimo.txt`** — Recordatorio de reunión de trabajo entre compañeros. Sin palabras de alerta. Resultado esperado: `LEGITIMO` al 100%.
-
-**`email_spam.txt`** — Marketing agresivo con palabras como "ganador", "gratis", "lotería", "millonario" y frases como "tiempo limitado" y "actúa ya". Resultado esperado: `SPAM` con confianza alta.
-
-**`email_phishing.txt`** — Suplantación de PayPal enviada desde `paypa1.com` (el número `1` reemplaza la letra `l`). Contiene frases como "su cuenta sera cerrada", "actividad inusual" y solicita contraseña y datos bancarios. Resultado esperado: `PHISHING` con confianza alta.
+En la carpeta `emails/` hay varios correos de ejemplo que cubren todas las categorías posibles: legítimos, sospechosos, spam y phishing. Se pueden usar directamente para probar el clasificador o como referencia para entender qué patrones activan cada categoría.
 
 ---
 
@@ -261,3 +187,7 @@ Puede tener varias líneas, URLs, lo que sea.
 ```
 
 En la siguiente ejecución de `python main.py` aparecerá automáticamente en la tabla.
+
+---
+
+*Proyecto realizado con Python 3.8+ — sin dependencias externas.*
