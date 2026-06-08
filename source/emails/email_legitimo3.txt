@@ -1,0 +1,19 @@
+From: prof.sandoval@facultad.edu.mx
+Subject: Entrega del proyecto final - recordatorio
+
+Estimados estudiantes,
+
+Os recuerdo que el plazo para entregar el proyecto final de la asignatura
+vence el proximo viernes 28 a las 23:59.
+
+La entrega se realiza a traves del campus virtual en la seccion
+"Proyectos / Entrega Final". Aseguraos de subir el codigo fuente
+y el documento de memoria en un unico archivo comprimido.
+
+Cualquier duda sobre los criterios de evaluacion podeis escribirme
+a este correo o pasaros por tutoria el miercoles de 11 a 13.
+
+Un saludo,
+Prof. Sandoval
+Algoritmos y Estructuras de Datos
+Facultad de Ingenieria Informatica
