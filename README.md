@@ -29,7 +29,7 @@ El resultado se muestra en una tabla con el porcentaje de confianza de cada deci
 **Requisitos:** Python 3.8 o superior. Sin librerías externas.
 
 ```bash
-cd develop
+cd project
 python main.py
 ```
 
